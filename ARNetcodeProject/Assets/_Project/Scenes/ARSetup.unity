@@ -1231,6 +1231,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1625037915}
   crosshair: {fileID: 484183549}
+  modelToAllign: {fileID: 1735684104}
+  colorArray:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  showCaseRoomQRArray:
+  - {fileID: 2061556164}
+  - {fileID: 2016287084}
+  - {fileID: 2140286472}
+  - {fileID: 989130681}
+  modelTOAllignQRArray:
+  - {fileID: 693461823}
+  - {fileID: 946334622}
+  - {fileID: 990893461}
+  - {fileID: 1126826776}
 --- !u!4 &675770413
 Transform:
   m_ObjectHideFlags: 0
