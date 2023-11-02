@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace sks {
     public class RayCastHandler : MonoBehaviour {
         GameManager gm;
@@ -27,27 +29,11 @@ namespace sks {
                     gm.AllignModel(showCaseRoomQRColor);
                 } else if (Physics.Raycast(ray, out hit, 100f) && hit.collider.GetComponent<Tagger>()?.groupTag == Tagger.GroupTag.Data) {
 
-                    string key = "";
-                    switch (hit.collider.GetComponent<Tagger>().tag) {
-                        case Tagger.Tag.RedData:
-                            key = "RedData";
-                            Debug.Log(key);
-                            break;
-                        case Tagger.Tag.GreenData:
-                            key = "GreenData";
-                            Debug.Log(key);
-                            break;
-                        case Tagger.Tag.BlueData:
-                            key = "BlueData";
-                            Debug.Log(key);
-                            break;
-                        case Tagger.Tag.YellowData:
-                            key = "YellowData";
-                            Debug.Log(key);
-                            break;
-                        default:
-                            break;
-                    }   
+                    string key = gm.GetKeyForDataTag(hit.collider.GetComponent<Tagger>());
+                   
+
+
+
 
                 }
             }
@@ -56,7 +42,7 @@ namespace sks {
 
 
         }
-
+        
 
 
     }

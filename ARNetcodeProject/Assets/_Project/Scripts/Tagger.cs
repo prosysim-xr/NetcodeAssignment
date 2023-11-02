@@ -8,10 +8,11 @@ namespace sks {
         public Tag tag;
         public enum Tag {
             None = 0,
-            RedData = 1,
-            GreenData = 2,
-            BlueData = 3,
-            YellowData = 4,
+            Alpha = 1,
+            Beta = 2,
+            Gama = 3,
+            Delta = 4,
+            Epsilon = 5,
         }
 
         public enum GroupTag {

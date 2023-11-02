@@ -22,6 +22,9 @@ namespace sks {
         }
         private void Update() {
 
+
+
+
         }
 
         public void AllignModel(Color showCaseRoomQRColor) {
@@ -44,6 +47,35 @@ namespace sks {
             modelToAllign.transform.parent = null;
             Destroy(go);
 
+        }
+
+        public string GetKeyForDataTag(Tagger tagger) {
+            if (tagger.groupTag != Tagger.GroupTag.Data) {
+                Debug.LogError("Tagger is not of type Data");
+                return "";
+            }
+            string key = "";
+            switch (tagger.tag) {
+                case Tagger.Tag.Alpha:
+                    key = "RedData";
+                    Debug.Log(key);
+                    break;
+                case Tagger.Tag.Beta:
+                    key = "GreenData";
+                    Debug.Log(key);
+                    break;
+                case Tagger.Tag.Gama:
+                    key = "BlueData";
+                    Debug.Log(key);
+                    break;
+                case Tagger.Tag.Delta:
+                    key = "YellowData";
+                    Debug.Log(key);
+                    break;
+                default:
+                    break;
+            }
+            return key;
         }
 
         /*
