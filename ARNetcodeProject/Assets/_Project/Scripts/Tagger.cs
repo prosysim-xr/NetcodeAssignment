@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace sks {
     public class Tagger : MonoBehaviour {
-        public GroupTag groupTag;
-        public Tag tag;
+        public GroupTag groupTag = GroupTag.None;
+        public Tag tag = Tag.None;
         public enum Tag {
             None = 0,
             Alpha = 1,

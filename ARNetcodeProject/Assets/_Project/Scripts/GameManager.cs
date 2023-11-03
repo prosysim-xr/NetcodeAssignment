@@ -3,15 +3,20 @@ using System;
 using UnityEngine;
 namespace sks {
     public class GameManager : Singleton<GameManager> {
+        [Header("References")]
         [SerializeField] GameObject player;
+        [SerializeField] string playerName = "User";
         [SerializeField] GameObject modelToAllign;
+        [SerializeField] DataHandler dataHandler;
+        [SerializeField] UIController uiController;
 
+        [Space]
         [SerializeField] Color[] colorArray;
         [SerializeField] Transform[] showCaseRoomQRArray;
         [SerializeField] Transform[] modelTOAllignQRArray;
 
-        // colorToQRs is showCaseRoomQR and modelToAllignQR.
-        private Dictionary<Color, Tuple<Transform, Transform>> colorToQRs = new Dictionary<Color, Tuple<Transform, Transform>>();
+        // colorToQRs is Tuple collection of  showCaseRoomQR and modelToAllignQR.
+        Dictionary<Color, Tuple<Transform, Transform>> colorToQRs = new Dictionary<Color, Tuple<Transform, Transform>>();
 
 
         private void Start() {
@@ -49,70 +54,39 @@ namespace sks {
 
         }
 
-        public string GetKeyForDataTag(Tagger tagger) {
+        public string GetDataKeyForGivenDataTag(Tagger tagger) {
             if (tagger.groupTag != Tagger.GroupTag.Data) {
                 Debug.LogError("Tagger is not of type Data");
                 return "";
             }
-            string key = "";
+            string dataKey = "";
             switch (tagger.tag) {
                 case Tagger.Tag.Alpha:
-                    key = "RedData";
-                    Debug.Log(key);
+                    dataKey = "Red";
                     break;
                 case Tagger.Tag.Beta:
-                    key = "GreenData";
-                    Debug.Log(key);
+                    dataKey = "Green";
                     break;
                 case Tagger.Tag.Gama:
-                    key = "BlueData";
-                    Debug.Log(key);
+                    dataKey = "Blue";
                     break;
                 case Tagger.Tag.Delta:
-                    key = "YellowData";
-                    Debug.Log(key);
+                    dataKey = "Yellow";
                     break;
                 default:
                     break;
             }
-            return key;
+            return dataKey;
         }
+        public void SetDataMessage(Tagger tagger) {
+            Debug.Log("/// 1");
+            string dataKey = GetDataKeyForGivenDataTag(tagger);
+            Debug.Log("/// 2");
 
-        /*
+            Debug.Log("DataKey: " + dataKey);
+            if(dataHandler !=null) dataHandler.SetDatatMessageFromCSVFile(dataKey);
+            Debug.Log("/// 13");
 
-            public void PanelData() { // use following to click and correctly orient once this is done Same Data can be sent to Multiplayer and they can update there model aswell.
-                // Create a dictionary to hold the data
-                Dictionary<Color, Tuple<Vector3, Vector3, Quaternion>> panelDictionary = new Dictionary<Color, Tuple<Vector3, Vector3, Quaternion>>();
-
-
-
-                // Replace with the actual color
-                //Color (Key)
-                Color colorOfPanel = Color.red;
-
-                //PanelData (Value)
-                Vector3 qrPanelPos = new Vector3(1, 2, 3); // Replace with the actual position
-                Vector3 modelToAllignPos = new Vector3(4, 5, 6); // Replace with the actual location
-                Quaternion modelToAllignRot = Quaternion.identity; // Replace with the actual rotation
-
-                // Define the data structure for the tuple
-                Tuple<Vector3, Vector3, Quaternion> panelData = new Tuple<Vector3, Vector3, Quaternion>(qrPanelPos, modelToAllignPos, modelToAllignRot);
-
-                panelDictionary.Add(colorOfPanel, panelData);
-                // You can add more entries to the dictionary as needed.
-                // Repeat the above steps with different values of colorOfPanel and panelData.
-
-
-                // To access the data for a specific colorOfPanel:
-                if (panelDictionary.TryGetValue(Color.red, out var panelInfo)) {
-                    Vector3 positionOfPanel = panelInfo.Item1;
-                    Vector3 locationOfAlignmentModel = panelInfo.Item2;
-                    Quaternion orientationOfAlignmentModel = panelInfo.Item3;
-
-                    // Now you have access to the data for the "red" panel.
-                }
-            }
-        */
-
+        }
     }
 }

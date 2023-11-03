@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 namespace sks {
     public class RayCastHandler : MonoBehaviour {
+        [Header("References")]
         GameManager gm;
         [SerializeField] RectTransform crosshair;
 
         // Start is called before the first frame update
         void Start() {
             gm = GameManager.Instance;
-
         }
 
         // Update is called once per frame
@@ -24,22 +24,23 @@ namespace sks {
             if (Input.GetMouseButtonDown(0)) {
                 if (Physics.Raycast(ray, out hit, 100f) && hit.collider.name == "Panel") {
                     Color showCaseRoomQRColor = hit.collider.GetComponent<MeshRenderer>().material.color;
-                    Debug.Log($"Hit Panel and Color is {showCaseRoomQRColor}");
-
                     gm.AllignModel(showCaseRoomQRColor);
                 } else if (Physics.Raycast(ray, out hit, 100f) && hit.collider.GetComponent<Tagger>()?.groupTag == Tagger.GroupTag.Data) {
-
-                    string key = gm.GetKeyForDataTag(hit.collider.GetComponent<Tagger>());
-                   
-
-
-
+                    Debug.Log("/// ...12");
+                    Tagger tagger = hit.collider.GetComponent<Tagger>();
+                    Debug.Log("tagger  tag is " + tagger.tag + " for grouptab "+ tagger.groupTag);
+                    if(tagger != null) gm.SetDataMessage(tagger);
 
                 }
+                /*
+                                Debug.Log("/// ...12.5");
+                                Tagger tagger = new Tagger();
+                                tagger.groupTag = Tagger.GroupTag.Data;
+                                tagger.tag = Tagger.Tag.Alpha;
+                                gm.SetDataMessage(tagger);
+                                Debug.Log("/// ...13");
+                */
             }
-
-            //Dictionary holding colorOfPanel as key and a Tuple of  position of Panel, location of AllignmentModel and orientation of AllignmentModel
-
 
         }
         
