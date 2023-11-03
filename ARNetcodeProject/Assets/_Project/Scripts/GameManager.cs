@@ -5,10 +5,11 @@ namespace sks {
     public class GameManager : Singleton<GameManager> {
         [Header("References")]
         [SerializeField] GameObject player;
-        [SerializeField] string playerName = "User";
+        public string playerName = "User";
         [SerializeField] GameObject modelToAllign;
         [SerializeField] DataHandler dataHandler;
         [SerializeField] UIController uiController;
+        [SerializeField] PlayerInfo playerInfo;
 
         [Space]
         [SerializeField] Color[] colorArray;
