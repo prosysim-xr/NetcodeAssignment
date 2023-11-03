@@ -18,12 +18,15 @@ namespace sks {
         // colorToQRs is Tuple collection of  showCaseRoomQR and modelToAllignQR.
         Dictionary<Color, Tuple<Transform, Transform>> colorToQRs = new Dictionary<Color, Tuple<Transform, Transform>>();
 
+        public DataMesage dataMesage;
 
         private void Start() {
             // Add all the colors and QRs to the dictionary
             for (int i = 0; i < colorArray.Length; i++) {
                 colorToQRs.Add(colorArray[i], new Tuple<Transform, Transform>(showCaseRoomQRArray[i], modelTOAllignQRArray[i]));
             }
+
+            DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
         }
         private void Update() {
 
@@ -79,14 +82,25 @@ namespace sks {
             return dataKey;
         }
         public void SetDataMessage(Tagger tagger) {
-            Debug.Log("/// 1");
             string dataKey = GetDataKeyForGivenDataTag(tagger);
-            Debug.Log("/// 2");
-
-            Debug.Log("DataKey: " + dataKey);
             if(dataHandler !=null) dataHandler.SetDatatMessageFromCSVFile(dataKey);
-            Debug.Log("/// 13");
 
+        }
+        private void OnMetaDataUpdate(string metaData) {
+            string heading = playerName +" clicked Data-Box Metadata is:";
+            dataMesage = new DataMesage(heading, metaData);
+            uiController.SetDataMessage(dataMesage);
+            uiController.OnOpenMessageBox();
+        }
+    }
+
+    [Serializable]
+    public class DataMesage {
+        public string heading;
+        public string metaData;
+        public DataMesage(string heading, string metaData) {
+            this.heading = heading;
+            this.metaData = metaData;
         }
     }
 }
