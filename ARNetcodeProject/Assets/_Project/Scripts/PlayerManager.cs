@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 namespace sks {
-    public class GameManager : Singleton<GameManager> {
+    public class PlayerManager : MonoBehaviour {
         [Header("References")]
         [SerializeField] GameObject player;
         public string playerName = "User";

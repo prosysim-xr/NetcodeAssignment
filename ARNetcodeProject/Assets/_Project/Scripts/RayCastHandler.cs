@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 namespace sks {
     public class RayCastHandler : MonoBehaviour {
         [Header("References")]
-        GameManager gm;
+        PlayerManager playerManager;
         [SerializeField] RectTransform crosshair;
 
         // Start is called before the first frame update
         void Start() {
-            gm = GameManager.Instance;
+            playerManager = Utils.FindComponentInSelfOrParents<PlayerManager>(transform);
         }
 
         // Update is called once per frame
@@ -24,22 +24,14 @@ namespace sks {
             if (Input.GetMouseButtonDown(0)) {
                 if (Physics.Raycast(ray, out hit, 100f) && hit.collider.name == "Panel") {
                     Color showCaseRoomQRColor = hit.collider.GetComponent<MeshRenderer>().material.color;
-                    gm.AllignModel(showCaseRoomQRColor);
+                    playerManager.AllignModel(showCaseRoomQRColor);
                 } else if (Physics.Raycast(ray, out hit, 100f) && hit.collider.GetComponent<Tagger>()?.groupTag == Tagger.GroupTag.Data) {
                     Debug.Log("/// ...12");
                     Tagger tagger = hit.collider.GetComponent<Tagger>();
                     Debug.Log("tagger  tag is " + tagger.tag + " for grouptab "+ tagger.groupTag);
-                    if(tagger != null) gm.SetDataMessage(tagger);
+                    if(tagger != null) playerManager.SetDataMessage(tagger);
 
                 }
-                /*
-                                Debug.Log("/// ...12.5");
-                                Tagger tagger = new Tagger();
-                                tagger.groupTag = Tagger.GroupTag.Data;
-                                tagger.tag = Tagger.Tag.Alpha;
-                                gm.SetDataMessage(tagger);
-                                Debug.Log("/// ...13");
-                */
             }
 
         }
