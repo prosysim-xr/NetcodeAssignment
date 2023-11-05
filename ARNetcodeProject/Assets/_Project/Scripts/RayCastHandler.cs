@@ -8,6 +8,7 @@ namespace sks {
         [Header("References")]
         PlayerManager playerManager;
         [SerializeField] RectTransform crosshair;
+        public bool isRayCasterHandlerReady = false;
 
         // Start is called before the first frame update
         void Start() {
@@ -16,7 +17,7 @@ namespace sks {
 
         // Update is called once per frame
         void Update() {
-
+            if (!isRayCasterHandlerReady) { return; }
             // Ray Cast from crosshair position into z direction of camera
             Ray ray = Camera.main.ScreenPointToRay(crosshair.position);
             RaycastHit hit;

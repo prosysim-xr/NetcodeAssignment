@@ -15,12 +15,7 @@ namespace sks {
             }
         }
         private void Start() {
-            StartCoroutine(nameof(Init));
         }
-        private IEnumerator Init() {
-            yield return new WaitUntil(() => ServiceLocator.instance.playerManager != null);
-        }
-
         public void JoinGame() {
             NetworkManager.Singleton.StartClient();
             EventsManager.instance.InvokeGameHostedOrJoined();

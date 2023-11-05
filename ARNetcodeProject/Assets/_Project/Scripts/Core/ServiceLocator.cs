@@ -5,8 +5,7 @@ using UnityEngine;
 namespace sks {
     public class ServiceLocator : MonoBehaviour {
         public static ServiceLocator instance;
-
-        public PlayerManager playerManager;
+        public Dictionary<int, PlayerManager> playerManagerDict = new Dictionary<int, PlayerManager>();
 
         public Transform[] showCaseRoomQRArray;
 

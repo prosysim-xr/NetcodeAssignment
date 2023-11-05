@@ -11,6 +11,7 @@ namespace sks {
 
         [SerializeField] GameObject joinHostPanel;
         [SerializeField] GameObject startUpCamera;
+        [SerializeField] GameObject startUpEventSystem;
 
         // Start is called before the first frame update
         void Start() {
@@ -42,6 +43,7 @@ namespace sks {
         private void OnGameHostedOrJoined() {
             joinHostPanel.SetActive(false);
             startUpCamera.SetActive(false);
+            startUpEventSystem.SetActive(false);
         }
     }
 }

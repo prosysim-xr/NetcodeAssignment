@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
+using StarterAssets;
+using UnityEngine.InputSystem;
 
 namespace sks {
     public class PlayerManager : MonoBehaviour {
@@ -12,7 +15,7 @@ namespace sks {
         [SerializeField] DataHandler dataHandler;
         [SerializeField] UIController uiController;
         [SerializeField] PlayerInfo playerInfo;
-
+        [SerializeField] RayCastHandler rayCastHandler;
         [Space]
         [SerializeField] Color[] colorArray;
         [SerializeField] Transform[] showCaseRoomQRArray;
@@ -22,15 +25,30 @@ namespace sks {
         Dictionary<Color, Tuple<Transform, Transform>> colorToQRs = new Dictionary<Color, Tuple<Transform, Transform>>();
 
         public DataMesage dataMesage;
-
+        public NetworkObject networkObject;
         private void Start() {
+            networkObject = GetComponent<NetworkObject>();
             StartCoroutine(nameof(Init));
         }
 
         private IEnumerator Init() {
             yield return new WaitUntil(() => ServiceLocator.instance != null);
+            ServiceLocator.instance.playerManagerDict.Add((int)networkObject.OwnerClientId , this);
 
-            ServiceLocator.instance.playerManager = this;// probably under condition of isMine
+            if(networkObject.IsOwner){
+                Transform parent = player.transform.parent;//Recheck this
+                for (int i = 0; i < parent.childCount; i++) {
+                    parent.GetChild(i).gameObject.SetActive(true);
+                }
+                player.GetComponent<CharacterController>().enabled = true;
+                player.GetComponent<FirstPersonController>().enabled = true;
+                player.GetComponent<PlayerInput>().enabled = true;
+                rayCastHandler.isRayCasterHandlerReady = true;
+            }
+            
+
+            playerName = "Player " + networkObject.OwnerClientId.ToString();
+            gameObject.name = playerName;
 
             showCaseRoomQRArray = ServiceLocator.instance.showCaseRoomQRArray;
             // Add all the colors and QRs to the dictionary
@@ -39,6 +57,11 @@ namespace sks {
             }
 
             DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
+
+            
+
+            
+
         }
 
         private void Update() {
