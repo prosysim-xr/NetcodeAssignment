@@ -100,7 +100,7 @@ namespace sks {
 
         }
         private void OnMetaDataUpdate(string metaData) {
-            string heading = playerName +" clicked Data-Box Metadata is:";
+            string heading = playerName +" Clicked, Metadata is:";
             dataMesage = new DataMesage(heading, metaData);
             uiController.SetDataMessage(dataMesage);
             uiController.OnOpenMessageBox();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +61,13 @@ namespace sks {
             if (onPlayerKilled != null) {
                 onPlayerKilled(playerManager);
             }
+        }
+
+
+        // Relevent events
+        public event Action OnGameHostedOrJoined;
+        public void InvokeGameHostedOrJoined() {
+            OnGameHostedOrJoined?.Invoke();
         }
     }
 }
