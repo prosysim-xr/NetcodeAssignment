@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 namespace sks {
     public class PlayerManager : MonoBehaviour {
         [Header("References")]
-        [SerializeField] GameObject player;
+        public GameObject player;
         public string playerName = "User";
         [SerializeField] GameObject modelToAllign;
         [SerializeField] DataHandler dataHandler;
@@ -26,8 +26,10 @@ namespace sks {
 
         public DataMesage dataMesage;
         public NetworkObject networkObject;
+        public PlayerSynchroniser playerSynchroniser;
         private void Start() {
             networkObject = GetComponent<NetworkObject>();
+            playerSynchroniser = GetComponent<PlayerSynchroniser>();
             StartCoroutine(nameof(Init));
         }
 
@@ -67,7 +69,15 @@ namespace sks {
         private void Update() {
 
 
+            if (networkObject.IsOwner) {
+                playerSynchroniser.OnStateChanged(
+                    playerSynchroniser.playerOrientation.Value, 
 
+                    new PlayerOrientation() {
+                    position = player.transform.position,
+                    rotation = player.transform.rotation
+                });
+            }
 
         }
 

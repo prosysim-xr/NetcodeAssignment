@@ -1917,7 +1917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8290836f36526e44ab46f2eaa0d699d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
   showCaseRoomQRArray:
   - {fileID: 2061556164}
   - {fileID: 2016287084}
