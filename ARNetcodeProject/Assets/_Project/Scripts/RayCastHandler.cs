@@ -16,6 +16,7 @@ namespace sks {
 
         // Update is called once per frame
         void Update() {
+
             // Ray Cast from crosshair position into z direction of camera
             Ray ray = Camera.main.ScreenPointToRay(crosshair.position);
             RaycastHit hit;

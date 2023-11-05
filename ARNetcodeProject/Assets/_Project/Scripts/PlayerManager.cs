@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Collections;
+
 namespace sks {
     public class PlayerManager : MonoBehaviour {
         [Header("References")]
@@ -22,6 +24,15 @@ namespace sks {
         public DataMesage dataMesage;
 
         private void Start() {
+            StartCoroutine(nameof(Init));
+        }
+
+        private IEnumerator Init() {
+            yield return new WaitUntil(() => ServiceLocator.instance != null);
+
+            ServiceLocator.instance.playerManager = this;// probably under condition of isMine
+
+            showCaseRoomQRArray = ServiceLocator.instance.showCaseRoomQRArray;
             // Add all the colors and QRs to the dictionary
             for (int i = 0; i < colorArray.Length; i++) {
                 colorToQRs.Add(colorArray[i], new Tuple<Transform, Transform>(showCaseRoomQRArray[i], modelTOAllignQRArray[i]));
@@ -29,6 +40,7 @@ namespace sks {
 
             DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
         }
+
         private void Update() {
 
 
