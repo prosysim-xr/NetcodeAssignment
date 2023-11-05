@@ -13,6 +13,7 @@ namespace sks {
         public string playerName = "User";
         [SerializeField] GameObject modelToAllign;
         [SerializeField] Transform modelToAllignParent;
+        [SerializeField] GameObject modelTOAllignReplica;
         Vector3 startingPos = new Vector3(0, 0, 0);
         [SerializeField] DataHandler dataHandler;
         [SerializeField] UIController uiController;
@@ -38,12 +39,22 @@ namespace sks {
         private IEnumerator Init() {
             yield return new WaitUntil(() => ServiceLocator.instance != null);
             ServiceLocator.instance.playerManagerDict.Add((int)networkObject.OwnerClientId , this);
+/*
+            if (networkObject.IsOwnedByServer) {
+                GameObject spawnedObject = Instantiate(ServiceLocator.instance.modelToAllign);
 
-            if(networkObject.IsOwner){
-                modelToAllign = ServiceLocator.instance.modelToAllign;
+                spawnedObject.GetComponent<NetworkObject>().Spawn(true);
+            }*/
+
+            if (networkObject.IsOwner){
+                
                 yield return new WaitUntil(() => ServiceLocator.instance.modelToAllign != null);
 
-                modelTOAllignQRArray =  modelToAllign.GetComponent<ModelToAllign>().modelTOAllignQRArray;
+                modelToAllign = ServiceLocator.instance.modelToAllign;
+                modelTOAllignReplica = ServiceLocator.instance.modelTOAllignReplica;
+
+                //modelTOAllignQRArray =  modelToAllign.GetComponent<ModelToAllign>().modelTOAllignQRArray;
+                modelTOAllignQRArray =  modelTOAllignReplica.GetComponent<ModelToAllign>().modelTOAllignQRArray;
 
                 Transform parent = player.transform.parent;//Recheck this
                 for (int i = 0; i < parent.childCount; i++) {
@@ -99,14 +110,15 @@ namespace sks {
             go.transform.localRotation = Quaternion.identity;
 
             go.transform.parent = showCaseRoomQRTr.root;
-            //go.transform.parent = null;
-
-            modelToAllign.transform.parent = go.transform;
+            modelTOAllignReplica.transform.parent = go.transform;
 
             go.transform.position = showCaseRoomQRTr.position;
             go.transform.rotation = showCaseRoomQRTr.rotation;
 
-            modelToAllign.transform.parent = null;
+            modelTOAllignReplica.transform.parent = null;
+
+            modelToAllign.transform.position = modelTOAllignReplica.transform.position;
+            modelToAllign.transform.rotation = modelTOAllignReplica.transform.rotation;
             Destroy(go);
 
         }

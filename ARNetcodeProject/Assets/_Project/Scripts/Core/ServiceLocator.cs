@@ -10,6 +10,7 @@ namespace sks {
         public Transform[] showCaseRoomQRArray;
 
         public GameObject modelToAllign;
+        public GameObject modelTOAllignReplica;
 
         private void Awake() {
             if (instance == null) {
