@@ -517,7 +517,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 246023648}
-    PlayerPrefab: {fileID: 8484946001449026156, guid: 57ee7309cda068e4db12c9da522f2617, type: 3}
+    PlayerPrefab: {fileID: 2040241337168381841, guid: f51f8ca5e16dfe44aa5b55e0fe0a2583, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 461be5603fd62dc4897bc6f5baae8db5, type: 2}
@@ -583,7 +583,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &354956140
 GameObject:
@@ -1058,6 +1058,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824153227}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &847738884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.315
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.6986542
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812881222723041431, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018623753361769183, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_Name
+      value: ModelToAlign
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243228854218745864, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243228854218745864, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4291235269
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8243228854218745864, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+--- !u!1 &847738885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8018623753361769183, guid: 16dd233c8eb477e4d9261cccb6926885, type: 3}
+  m_PrefabInstance: {fileID: 847738884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &989130680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1922,6 +1997,7 @@ MonoBehaviour:
   - {fileID: 2016287084}
   - {fileID: 2140286472}
   - {fileID: 989130681}
+  modelToAllign: {fileID: 847738885}
 --- !u!1 &1796462169
 GameObject:
   m_ObjectHideFlags: 0

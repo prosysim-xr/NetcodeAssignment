@@ -12,6 +12,8 @@ namespace sks {
         public GameObject player;
         public string playerName = "User";
         [SerializeField] GameObject modelToAllign;
+        [SerializeField] Transform modelToAllignParent;
+        Vector3 startingPos = new Vector3(0, 0, 0);
         [SerializeField] DataHandler dataHandler;
         [SerializeField] UIController uiController;
         [SerializeField] PlayerInfo playerInfo;
@@ -38,6 +40,11 @@ namespace sks {
             ServiceLocator.instance.playerManagerDict.Add((int)networkObject.OwnerClientId , this);
 
             if(networkObject.IsOwner){
+                modelToAllign = ServiceLocator.instance.modelToAllign;
+                yield return new WaitUntil(() => ServiceLocator.instance.modelToAllign != null);
+
+                modelTOAllignQRArray =  modelToAllign.GetComponent<ModelToAllign>().modelTOAllignQRArray;
+
                 Transform parent = player.transform.parent;//Recheck this
                 for (int i = 0; i < parent.childCount; i++) {
                     parent.GetChild(i).gameObject.SetActive(true);
@@ -46,8 +53,14 @@ namespace sks {
                 player.GetComponent<FirstPersonController>().enabled = true;
                 player.GetComponent<PlayerInput>().enabled = true;
                 rayCastHandler.isRayCasterHandlerReady = true;
+
             }
-            
+
+            if (!networkObject.IsOwner) {
+                // Set randomly the position of the playerFPSSetup around startingPos (to avoid players to be on top of each other)
+                transform.position = startingPos  + new Vector3(UnityEngine.Random.Range(-1f, 1f), startingPos.y, UnityEngine.Random.Range(-1f, 1f));
+            }
+
 
             playerName = "Player " + networkObject.OwnerClientId.ToString();
             gameObject.name = playerName;
@@ -59,15 +72,10 @@ namespace sks {
             }
 
             DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
-
-            
-
-            
-
         }
 
         private void Update() {
-
+/*
 
             if (networkObject.IsOwner) {
                 playerSynchroniser.OnStateChanged(
@@ -77,7 +85,7 @@ namespace sks {
                     position = player.transform.position,
                     rotation = player.transform.rotation
                 });
-            }
+            }*/
 
         }
 

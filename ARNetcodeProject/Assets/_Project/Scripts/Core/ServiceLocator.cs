@@ -9,6 +9,8 @@ namespace sks {
 
         public Transform[] showCaseRoomQRArray;
 
+        public GameObject modelToAllign;
+
         private void Awake() {
             if (instance == null) {
                 instance = this;//its ok if this is destroyed on scene change
