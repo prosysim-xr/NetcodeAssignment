@@ -5,7 +5,6 @@ using System.Collections;
 using Unity.Netcode;
 using StarterAssets;
 using UnityEngine.InputSystem;
-using UnityEditor.PackageManager;
 
 namespace sks {
     public class PlayerManager : MonoBehaviour {
