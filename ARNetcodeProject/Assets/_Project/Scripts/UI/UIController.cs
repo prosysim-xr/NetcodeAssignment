@@ -39,6 +39,10 @@ namespace sks {
             OnHeadingUpdate(dataMessage.heading);
             OnMetaDataUpdate(dataMessage.metaData);
         }
+        public void ReSetDataMessage() {
+            OnHeadingUpdate("");
+            OnMetaDataUpdate("");
+        }
         void OnDestroy() {
             closeBtn.onClick.RemoveAllListeners();
         }

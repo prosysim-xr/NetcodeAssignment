@@ -21,6 +21,11 @@ namespace sks {
             Model = 2,
             Info = 3
         }
+
+        public Tagger(int groupTag, int tag) {
+            this.groupTag = (Tagger.GroupTag)groupTag;
+            this.tag = (Tagger.Tag)tag;
+        }
     }
 }
 

@@ -3,6 +3,8 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Unity.Netcode;
+
 namespace sks {
     public class DataHandler : MonoBehaviour {
 
@@ -10,9 +12,13 @@ namespace sks {
         [SerializeField] string dataKey;
         [TextArea]
         public string metaData;
+        public PlayerManager playerManager;
 
         //Events
         public static event Action<string> OnMetaDataUpdate;
+        private void Start() {
+            playerManager = Utils.FindComponentInSelfOrParents<PlayerManager>(transform);
+        }
 
         public void SetDatatMessageFromCSVFile(string dataKey) {
             this.dataKey = dataKey;
@@ -65,7 +71,12 @@ namespace sks {
                             recordCcolumnsKVP.Add(i, recordValues); //Note /u0009 is tab other way to do is \t
                         }
                         metaData = newMetaData;
+                        /*if (playerManager.playerSynchroniser.dataShowClientID== (int)NetworkManager.Singleton.LocalClientId) {
+                            OnMetaDataUpdate?.Invoke(metaData);
+                        }*/
+
                         OnMetaDataUpdate?.Invoke(metaData);
+
                         break;
                 }
             }

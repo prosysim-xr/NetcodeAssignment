@@ -5,6 +5,7 @@ using System.Collections;
 using Unity.Netcode;
 using StarterAssets;
 using UnityEngine.InputSystem;
+using UnityEditor.PackageManager;
 
 namespace sks {
     public class PlayerManager : MonoBehaviour {
@@ -82,22 +83,7 @@ namespace sks {
                 colorToQRs.Add(colorArray[i], new Tuple<Transform, Transform>(showCaseRoomQRArray[i], modelTOAllignQRArray[i]));
             }
 
-            DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
-        }
-
-        private void Update() {
-/*
-
-            if (networkObject.IsOwner) {
-                playerSynchroniser.OnStateChanged(
-                    playerSynchroniser.playerOrientation.Value, 
-
-                    new PlayerOrientation() {
-                    position = player.transform.position,
-                    rotation = player.transform.rotation
-                });
-            }*/
-
+                DataHandler.OnMetaDataUpdate += OnMetaDataUpdate;
         }
 
         public void AllignModel(Color showCaseRoomQRColor) {
@@ -149,14 +135,27 @@ namespace sks {
         }
         public void SetDataMessage(Tagger tagger) {
             string dataKey = GetDataKeyForGivenDataTag(tagger);
-            if(dataHandler !=null) dataHandler.SetDatatMessageFromCSVFile(dataKey);
+            if (dataHandler != null) dataHandler.SetDatatMessageFromCSVFile(dataKey);
 
         }
         private void OnMetaDataUpdate(string metaData) {
-            string heading = playerName +" Clicked, Metadata is:";
+            int id = ServiceLocator.instance.dataShowClientID;
+            if (id == -1) { return; }
+            string heading = $"Player {id} Clicked a Color, Metadata:";
+            
             dataMesage = new DataMesage(heading, metaData);
-            uiController.SetDataMessage(dataMesage);
-            uiController.OnOpenMessageBox();
+
+            foreach (var v in ServiceLocator.instance.playerManagerDict) {
+                v.Value.uiController.OnCloseMessageBox();
+            }
+            ServiceLocator.instance.playerManagerDict[ServiceLocator.instance.dataShowClientID].uiController.OnOpenMessageBox();
+            ServiceLocator.instance.playerManagerDict[ServiceLocator.instance.dataShowClientID].uiController.SetDataMessage(dataMesage);
+
+            /*foreach (var v in ServiceLocator.instance.playerManagerDict) {
+                v.Value.playerSynchroniser.dataShowClientID = -1;
+            }*/
+            ServiceLocator.instance.dataShowClientID = -1;
+
         }
     }
 

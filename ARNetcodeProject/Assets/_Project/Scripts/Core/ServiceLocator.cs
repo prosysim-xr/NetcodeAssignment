@@ -12,6 +12,8 @@ namespace sks {
         public GameObject modelToAllign;
         public GameObject modelTOAllignReplica;
 
+        public int dataShowClientID = -1;
+
         private void Awake() {
             if (instance == null) {
                 instance = this;//its ok if this is destroyed on scene change
