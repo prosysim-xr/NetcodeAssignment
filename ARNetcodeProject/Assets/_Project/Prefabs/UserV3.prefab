@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: modelTOAllignQRArray.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6631273116581726953, guid: 57ee7309cda068e4db12c9da522f2617, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7789314887385999987, guid: 57ee7309cda068e4db12c9da522f2617, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334

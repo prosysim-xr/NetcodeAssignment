@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,7 +27,10 @@ namespace sks {
             if (Input.GetMouseButtonDown(0)) {
                 if (Physics.Raycast(ray, out hit, 100f) && hit.collider.name == "Panel") {
                     Color showCaseRoomQRColor = hit.collider.GetComponent<MeshRenderer>().material.color;
-                    playerManager.AllignModel(showCaseRoomQRColor);
+                    //playerManager.AllignModel(showCaseRoomQRColor);
+                    Debug.Log("//1");
+                    playerManager.GetComponent<PlayerSynchroniser>().OnQRClickedServerRpc(showCaseRoomQRColor);
+                    Debug.Log("//2");
                 } else if (Physics.Raycast(ray, out hit, 100f) && hit.collider.GetComponent<Tagger>()?.groupTag == Tagger.GroupTag.Data) {
                     Debug.Log("/// ...12");
                     Tagger tagger = hit.collider.GetComponent<Tagger>();
